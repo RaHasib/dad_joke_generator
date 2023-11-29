@@ -1,10 +1,9 @@
-// DadJokeApi.js
-import { useState } from "react";
+import {useState} from "react";
 
-function DadJokeApi() {
+function useDadJokeApiLogic() {
     const [joke, setJoke] = useState("");
 
-    const fetchJoke = async () => {
+    const fetchJoke = async (callback) => {
         try {
             const response = await fetch("https://icanhazdadjoke.com/", {
                 headers: {
@@ -18,17 +17,18 @@ function DadJokeApi() {
 
             const data = await response.json();
             setJoke(data.joke);
+            callback();
         } catch (error) {
             console.error(error.message);
             setJoke("Error fetching joke. Please try again.");
         }
     };
 
-    // Return individual properties instead of an object
+
     return {
         fetchJoke,
         joke,
     };
 }
 
-export default DadJokeApi;
+export default useDadJokeApiLogic;
