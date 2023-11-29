@@ -77,7 +77,7 @@ function DadJokes() {
                         }}
                     >
                         <Typography variant="h3" sx={{color: 'white'}}>
-                            Dad Joke Generator 🫧
+                            Dad Joke Generator 😘
                         </Typography>
                     </div>
                     <Box>
