@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useRef} from 'react';
 import '../../App.css';
 import useDadJokeApiLogic from './useDadJokeApiLogic';
 import {Box, Typography} from '@mui/material';
@@ -17,12 +17,9 @@ function DadJokes() {
     });
 
     const {fetchJoke, joke} = useDadJokeApiLogic();
-    const [contentHeight, setContentHeight] = useState(70);
+
     const contentRef = useRef(null);
 
-    useEffect(() => {
-        setContentHeight(contentRef.current.offsetHeight);
-    }, [joke]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -35,22 +32,6 @@ function DadJokes() {
                     justifyContent: 'center',
                 }}
             >
-                <Box
-
-                    component="img"
-                    src={gifPath}
-                    alt="gif"
-                    sx={{
-                        position: 'absolute',
-                        top: contentHeight + 'px',
-                        right: '30%',
-                        width: '10%',
-                        zIndex: '1',
-                        maxWidth: '100%',
-                        height: 'auto',
-                        display:  { xs: 'none', md: 'block' }
-                        }}
-                />
                 <Box
                     ref={contentRef}
                     sx={{
@@ -69,6 +50,21 @@ function DadJokes() {
                         height: 'auto',
                     }}
                 >
+                    <Box
+                        component="img"
+                        src={gifPath}
+                        alt="gif"
+                        sx={{
+                            position: 'absolute',
+                            top: '0',
+                            right: '45%',
+                            width: '12%',
+                            zIndex: '1',
+                            maxWidth: '100%',
+                            height: 'auto',
+                            display: { xs: 'none', md: 'block' ,lg:'block'}
+                        }}
+                    />
                     <div
                         style={{
                             display: 'flex',
@@ -91,7 +87,7 @@ function DadJokes() {
                                 variant="contained"
                                 color="lightBlue"
                                 sx={{color: 'white'}}
-                                onClick={() => fetchJoke(() => setContentHeight(contentRef.current.offsetHeight))}
+                                onClick={fetchJoke}
                             >
                                 Click to Get Dad Joke ;)
                             </Button>

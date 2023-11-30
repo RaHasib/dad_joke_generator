@@ -3,7 +3,7 @@ import {useState} from "react";
 function useDadJokeApiLogic() {
     const [joke, setJoke] = useState("");
 
-    const fetchJoke = async (callback) => {
+    const fetchJoke = async () => {
         try {
             const response = await fetch("https://icanhazdadjoke.com/", {
                 headers: {
@@ -17,7 +17,7 @@ function useDadJokeApiLogic() {
 
             const data = await response.json();
             setJoke(data.joke);
-            callback();
+
         } catch (error) {
             console.error(error.message);
             setJoke("Error fetching joke. Please try again.");
