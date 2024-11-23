@@ -2,7 +2,7 @@
 
 A fun and interactive Dad Joke Generator built with React and Material-UI. Get your daily dose of dad jokes with a sleek, modern interface!
 
-![Dad Joke Generator](src\Asset\Images\joke.png)
+![Dad Joke Generator](/src/Asset/Images/joke.png)
 
 ## 🌟 Features
 
