@@ -1,118 +1,254 @@
-import React, { useRef} from 'react';
-import '../../App.css';
+import React from 'react';
 import useDadJokeApiLogic from './useDadJokeApiLogic';
-import {Box, Typography} from '@mui/material';
-import Button from '@mui/material/Button';
-import {ThemeProvider, createTheme} from '@mui/material/styles';
+import { Box, Typography, Card, Button, Fade, IconButton } from '@mui/material';
+import { AutoAwesome, ContentCopy, Share } from '@mui/icons-material';
 import Footer from "../Footer/Footer";
-import gifPath from "./../../catSleep.gif"
+import gifPath from "./../../catSleep.gif";
+import { cardStyles, buttonStyles } from '../../styles/common';
 
 function DadJokes() {
-    const theme = createTheme({
-        palette: {
-            lightBlue: {
-                main: '#164863',
-            },
-        },
-    });
+    const { fetchJoke, joke, isLoading } = useDadJokeApiLogic();
 
-    const {fetchJoke, joke} = useDadJokeApiLogic();
+    const copyToClipboard = () => {
+        if (joke) {
+            navigator.clipboard.writeText(joke)
+                .then(() => {
+                    console.log('Joke copied to clipboard');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+        }
+    };
 
-    const contentRef = useRef(null);
-
+    const shareJoke = () => {
+        if (joke && navigator.share) {
+            navigator.share({
+                title: 'Dad Joke',
+                text: joke,
+            }).catch(err => {
+                console.error('Failed to share: ', err);
+            });
+        }
+    };
 
     return (
-        <ThemeProvider theme={theme}>
-            <Box
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    minHeight: '100vh',
-                    justifyContent: 'center',
+        <Box 
+            sx={{ 
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                position: 'relative',
+                zIndex: 1,
+                mt: 8
+            }}
+        >
+            <Card
+                sx={{
+                    ...cardStyles,
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(20px)',
+                    position: 'relative',
+                    overflow: 'visible',
+                    maxWidth: '90%',
+                    width: '600px',
+                    borderRadius: '30px',
+                    boxShadow: `
+                        0 10px 30px rgba(0,0,0,0.1),
+                        0 1px 8px rgba(0,0,0,0.05),
+                        inset 0 1px 0 rgba(255,255,255,0.6)
+                    `,
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    '&:hover': {
+                        transform: 'translateY(-5px) scale(1.01)',
+                        boxShadow: `
+                            0 20px 40px rgba(0,0,0,0.12),
+                            0 4px 12px rgba(0,0,0,0.08),
+                            inset 0 1px 0 rgba(255,255,255,0.8)
+                        `,
+                    },
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        borderRadius: '30px',
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
+                        opacity: 0.7,
+                    }
                 }}
             >
                 <Box
-                    ref={contentRef}
                     sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '100px',
+                        position: 'absolute',
+                        top: '-60px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '160px',
+                        height: '160px',
+                        borderRadius: '50%',
+                        background: 'white',
+                        display: { xs: 'none', md: 'flex' },
                         justifyContent: 'center',
-                        backdropFilter: 'blur(10px)',
-                        backgroundColor: 'rgba(255,255,255,0.2)',
-                        borderRadius: '10px',
-                        boxShadow: '10px 10px 10px rgba(30,30,30,0.1)',
-                        position: 'relative',
-                        zIndex: '0',
-                        maxWidth: '100%',
-                        height: 'auto',
+                        alignItems: 'center',
+                        overflow: 'hidden',
+                        border: '4px solid white',
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                        zIndex: 2
                     }}
                 >
                     <Box
                         component="img"
                         src={gifPath}
-                        alt="gif"
+                        alt="sleeping cat"
                         sx={{
-                            position: 'absolute',
-                            top: '0',
-                            right: '45%',
-                            width: '12%',
-                            zIndex: '1',
-                            maxWidth: '100%',
-                            height: 'auto',
-                            display: { xs: 'none', md: 'block' ,lg:'block'}
+                            width: '140px',
+                            height: '140px',
+                            objectFit: 'cover',
                         }}
                     />
-                    <div
-                        style={{
+                </Box>
+
+                <Box 
+                    sx={{ 
+                        pt: { xs: 3, md: 12 },
+                        pb: 4, 
+                        px: { xs: 2, sm: 4 },
+                        position: 'relative',
+                        zIndex: 1
+                    }}
+                >
+                    <Typography 
+                        variant="h3" 
+                        component="h1"
+                        sx={{
+                            mb: 4,
+                            mt: { xs: 2, md: 3 },
+                            textAlign: 'center',
+                            fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+                            fontWeight: 800,
+                            background: 'linear-gradient(45deg, #FF6B6B 30%, #4ECDC4 90%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
                             display: 'flex',
-                            flexDirection: 'column',
                             alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: 1,
+                            flexWrap: 'wrap',
+                            lineHeight: 1.2,
+                            px: 2
                         }}
                     >
-                        <Typography variant="h3" sx={{color: 'white'}}>
-                            Dad Joke Generator 😘
-                        </Typography>
-                    </div>
-                    <Box>
-                        <div
-                            style={{
-                                marginTop: '20px',
-                                alignItems: 'center',
+                        <span>Dad Joke Generator</span>
+                        <span style={{ 
+                            WebkitTextFillColor: 'initial',
+                            fontSize: '0.9em'
+                        }}>
+                            😄
+                        </span>
+                    </Typography>
+
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+                        <Button
+                            variant="contained"
+                            onClick={fetchJoke}
+                            disabled={isLoading}
+                            startIcon={<AutoAwesome />}
+                            sx={{
+                                ...buttonStyles,
+                                background: 'linear-gradient(45deg, #FF6B6B 30%, #4ECDC4 90%)',
+                                color: 'white',
+                                '&:hover': {
+                                    background: 'linear-gradient(45deg, #FF8787 30%, #65D8D0 90%)',
+                                }
                             }}
                         >
-                            <Button
-                                variant="contained"
-                                color="lightBlue"
-                                sx={{color: 'white'}}
-                                onClick={fetchJoke}
-                            >
-                                Click to Get Dad Joke ;)
-                            </Button>
+                            {isLoading ? 'Loading...' : 'Get a Dad Joke'}
+                        </Button>
+                    </Box>
 
-                            <div style={{marginTop: '20px', textAlign: 'center'}}>
-                                {joke && (
-                                    <div>
-                                        <Typography variant="h5" sx={{color: 'white'}}>
-                                            Dad Joke 😁
-                                        </Typography>
-                                        <Typography sx={{marginTop: '20px', color: "white"}}>{joke}</Typography>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
+                    <Box>
+                        <Box sx={{ 
+                            minHeight: '100px',
+                            background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%)',
+                            borderRadius: '20px',
+                            p: { xs: 2, sm: 3 },
+                            mb: 3,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.05)',
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            backdropFilter: 'blur(10px)',
+                            mx: 2,
+                            transition: 'all 0.3s ease-in-out'
+                        }}>
+                            <Fade in={true} timeout={800}>
+                                <Typography 
+                                    variant="h6"
+                                    sx={{
+                                        color: joke ? 'text.primary' : 'text.secondary',
+                                        textAlign: 'center',
+                                        fontWeight: 500,
+                                        lineHeight: 1.6,
+                                        fontSize: { xs: '1rem', sm: '1.25rem' },
+                                        fontStyle: joke ? 'normal' : 'italic',
+                                        opacity: joke ? 1 : 0.7,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 1
+                                    }}
+                                >
+                                    {!joke && <AutoAwesome sx={{ opacity: 0.5 }} />}
+                                    {joke || "Click the button above to get a dad joke!"}
+                                </Typography>
+                            </Fade>
+                        </Box>
+                        
+                        <Fade in={!!joke} timeout={800}>
+                            <Box sx={{ 
+                                display: 'flex', 
+                                justifyContent: 'center',
+                                gap: 2,
+                                height: joke ? 'auto' : 0,
+                                opacity: joke ? 1 : 0
+                            }}>
+                                <IconButton 
+                                    onClick={copyToClipboard}
+                                    sx={{ 
+                                        color: '#FF6B6B',
+                                        '&:hover': {
+                                            background: 'rgba(255,107,107,0.1)'
+                                        }
+                                    }}
+                                >
+                                    <ContentCopy />
+                                </IconButton>
+                                <IconButton 
+                                    onClick={shareJoke}
+                                    sx={{ 
+                                        color: '#4ECDC4',
+                                        '&:hover': {
+                                            background: 'rgba(78,205,196,0.1)'
+                                        }
+                                    }}
+                                >
+                                    <Share />
+                                </IconButton>
+                            </Box>
+                        </Fade>
                     </Box>
                 </Box>
-                <Box style={{
-                    padding: '20px',
-                    alignItems: 'center',
-                }}>
-                    <Footer/>
-                </Box>
+            </Card>
+            
+            <Box sx={{ mt: 4 }}>
+                <Footer />
             </Box>
-        </ThemeProvider>
+        </Box>
     );
 }
 
