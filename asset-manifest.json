@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dad_joke_generator/static/css/main.fed75c37.css",
-    "main.js": "/dad_joke_generator/static/js/main.267b5998.js",
+    "main.js": "/dad_joke_generator/static/js/main.522b9a77.js",
     "static/media/catSleep.gif": "/dad_joke_generator/static/media/catSleep.5c4dbabe6478c31a7955.gif",
     "static/media/poppins-latin-400-normal.woff": "/dad_joke_generator/static/media/poppins-latin-400-normal.1458587c0aa7cd06b82b.woff",
     "static/media/poppins-latin-300-normal.woff": "/dad_joke_generator/static/media/poppins-latin-300-normal.3555e897caceedb85c78.woff",
@@ -21,10 +21,10 @@
     "static/media/poppins-latin-ext-700-normal.woff2": "/dad_joke_generator/static/media/poppins-latin-ext-700-normal.b5109c3e385395dfd649.woff2",
     "index.html": "/dad_joke_generator/index.html",
     "main.fed75c37.css.map": "/dad_joke_generator/static/css/main.fed75c37.css.map",
-    "main.267b5998.js.map": "/dad_joke_generator/static/js/main.267b5998.js.map"
+    "main.522b9a77.js.map": "/dad_joke_generator/static/js/main.522b9a77.js.map"
   },
   "entrypoints": [
     "static/css/main.fed75c37.css",
-    "static/js/main.267b5998.js"
+    "static/js/main.522b9a77.js"
   ]
 }
