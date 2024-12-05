@@ -7,7 +7,7 @@ function useDadJokeApiLogic() {
     const fetchJoke = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch("https://icanhazdadjoke.com/", {
+            const response = await fetch(process.env.REACT_APP_DAD_JOKE_API_URL, {
                 headers: {
                     Accept: "application/json",
                 },

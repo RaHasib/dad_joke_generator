@@ -114,19 +114,6 @@ The app includes several animations:
 - Fade transitions for jokes
 - Sleeping cat animation
 
-## 🌐 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## 👨‍💻 Developer
-
-Developed by [Raisul Amin Hasib](https://github.com/RaHasib)
-
-- GitHub: [@RaHasib](https://github.com/RaHasib)
-- LinkedIn: [Raisul Amin Hasib](https://www.linkedin.com/in/raisul-amin-hasib/)
 
 ## 📄 License
 
@@ -162,16 +149,6 @@ Give a ⭐️ if you like this project!
 
 This project is actively maintained. New features and improvements are welcome!
 
-## 🔮 Future Enhancements
-
-Planned features:
-- Dark mode support
-- Favorite jokes storage
-- Categories for jokes
-- Social media sharing
-- Joke rating system
-- User accounts
-- Mobile app version
 
 ## 💡 Usage Tips
 
