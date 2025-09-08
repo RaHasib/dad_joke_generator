@@ -67,11 +67,6 @@ The app includes several animations:
 - Fade transitions for jokes
 - Sleeping cat animation
 
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - [icanhazdadjoke](https://icanhazdadjoke.com/) for the awesome dad jokes API
