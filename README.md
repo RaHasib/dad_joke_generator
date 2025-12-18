@@ -113,12 +113,7 @@ User-Agent: 'Dad Joke Generator'
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit pull request
 
-## License
-
-MIT License. See LICENSE file for details.
 
 ## Acknowledgments
 
 - icanhazdadjoke API
-- Material-UI component library
-- Create React App
