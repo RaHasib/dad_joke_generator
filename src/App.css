@@ -1,21 +1,8 @@
 .App {
   min-height: 100vh;
-  background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+  background: #fafafa;
   position: relative;
   overflow-x: hidden;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-
-.emoji {
-  font-size: 24px;
-  position: absolute;
-  pointer-events: none;
-  user-select: none;
 }
 
 /* Add smooth scrolling to the whole page */
@@ -23,14 +10,33 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Add better focus styles for accessibility */
-:focus {
-  outline: 2px solid #4ECDC4;
+/* Swiss design focus styles */
+:focus-visible {
+  outline: 2px solid #18181b;
   outline-offset: 2px;
 }
 
 /* Improve text selection */
 ::selection {
-  background: #4ECDC4;
+  background: #18181b;
   color: white;
+}
+
+::-moz-selection {
+  background: #18181b;
+  color: white;
+}
+
+/* Minimal scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 4px;
 }

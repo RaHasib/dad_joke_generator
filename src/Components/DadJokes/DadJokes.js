@@ -1,13 +1,13 @@
 import React from 'react';
 import useDadJokeApiLogic from './useDadJokeApiLogic';
-import { Box, Typography, Card, Button, Fade, IconButton } from '@mui/material';
-import { AutoAwesome, ContentCopy, Share } from '@mui/icons-material';
+import { Box, Typography, Card, Button, IconButton, Divider } from '@mui/material';
+import { ContentCopy, Share } from '@mui/icons-material';
 import Footer from "../Footer/Footer";
-import gifPath from "./../../catSleep.gif";
 
 function DadJokes() {
     const { fetchJoke, joke, isLoading } = useDadJokeApiLogic();
     const [canShare, setCanShare] = React.useState(false);
+    const [copied, setCopied] = React.useState(false);
 
     React.useEffect(() => {
         setCanShare(!!navigator.share);
@@ -17,7 +17,8 @@ function DadJokes() {
         if (joke) {
             navigator.clipboard.writeText(joke)
                 .then(() => {
-                    console.log('Joke copied to clipboard');
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
                 })
                 .catch(err => {
                     console.error('Failed to copy text: ', err);
@@ -43,141 +44,152 @@ function DadJokes() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: { xs: 'center', md: 'flex-start' },
-            mt: { xs: 0, md: 8 },
-            pt: { xs: 0, md: 6 }
+            justifyContent: 'center',
+            py: 6,
+            px: 2
         }}>
-            <Box sx={{
-                width: '110px',
-                height: '110px',
-                borderRadius: '50%',
-                background: 'white',
-                display: { xs: 'none', md: 'block' },
-                position: 'relative',
-                marginBottom: '-55px',
-                border: '4px solid white',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
-                zIndex: 2,
-                overflow: 'hidden'
+            <Box sx={{ 
+                maxWidth: '640px',
+                width: '100%'
             }}>
-                <Box
-                    component="img"
-                    src={gifPath}
-                    alt="sleeping cat"
-                    sx={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block'
-                    }}
-                />
-            </Box>
-
-            <Card sx={{
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(20px)',
-                position: 'relative',
-                maxWidth: '90%',
-                width: '600px',
-                borderRadius: '30px',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-                border: '1px solid rgba(255,255,255,0.3)',
-                zIndex: 1
-            }}>
+                {/* Header Section */}
                 <Box sx={{ 
-                    pt: { xs: 3, md: 8 },
-                    pb: 4, 
-                    px: { xs: 2, sm: 4 }
+                    textAlign: 'left',
+                    mb: 6
                 }}>
                     <Typography 
-                        variant="h3" 
+                        variant="h1" 
                         component="h1"
                         sx={{
-                            mb: 4,
-                            textAlign: 'center',
-                            fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
-                            fontWeight: 800,
-                            background: 'linear-gradient(45deg, #FF6B6B 30%, #4ECDC4 90%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent'
+                            fontSize: { xs: '2.25rem', sm: '3rem' },
+                            fontWeight: 700,
+                            color: 'text.primary',
+                            mb: 2,
+                            letterSpacing: '-0.025em'
                         }}
                     >
-                        <span>Dad Joke Generator</span>
-                        <span style={{ WebkitTextFillColor: 'initial', fontSize: '0.9em' }}>
-                            😄
-                        </span>
+                        Dad Joke Generator
                     </Typography>
+                    <Typography 
+                        variant="body1"
+                        sx={{
+                            color: 'text.secondary',
+                            fontSize: '1rem',
+                            fontWeight: 400,
+                            maxWidth: '480px'
+                        }}
+                    >
+                        A collection of groan-worthy humor. Click the button below to generate a new joke.
+                    </Typography>
+                </Box>
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+                {/* Main Card */}
+                <Card sx={{
+                    background: 'white',
+                    mb: 4
+                }}>
+                    <Box sx={{ p: { xs: 3, sm: 4 } }}>
+                        {/* Get Joke Button */}
                         <Button
                             variant="contained"
+                            fullWidth
                             onClick={fetchJoke}
                             disabled={isLoading}
-                            startIcon={<AutoAwesome />}
                             sx={{
-                                background: 'linear-gradient(45deg, #FF6B6B 30%, #4ECDC4 90%)',
+                                background: '#18181b',
                                 color: 'white',
-                                px: 4,
-                                py: 1,
-                                borderRadius: '25px'
+                                py: 1.25,
+                                fontSize: '0.875rem',
+                                fontWeight: 500,
+                                mb: 3,
+                                '&:disabled': {
+                                    background: '#e4e4e7',
+                                    color: '#71717a'
+                                }
                             }}
                         >
-                            {isLoading ? 'Loading...' : 'Get a Dad Joke'}
+                            {isLoading ? 'Loading...' : 'Generate Joke'}
                         </Button>
-                    </Box>
 
-                    <Box sx={{ 
-                        minHeight: '100px',
-                        background: 'rgba(255,255,255,0.8)',
-                        borderRadius: '20px',
-                        p: 3,
-                        mb: 3,
-                        textAlign: 'center'
-                    }}>
-                        <Fade in={true} timeout={800}>
+                        <Divider sx={{ mb: 3 }} />
+
+                        {/* Joke Display Area */}
+                        <Box sx={{ 
+                            minHeight: '120px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mb: 3
+                        }}>
                             <Typography 
-                                variant="h6"
+                                variant="body1"
                                 sx={{
                                     color: joke ? 'text.primary' : 'text.secondary',
-                                    fontWeight: 500,
-                                    fontSize: { xs: '1rem', sm: '1.25rem' }
+                                    fontSize: '1.125rem',
+                                    lineHeight: 1.75,
+                                    textAlign: 'center',
+                                    fontWeight: joke ? 400 : 400
                                 }}
                             >
-                                {!joke && <AutoAwesome sx={{ opacity: 0.5 }} />}
-                                {joke || "Click the button above to get a dad joke!"}
+                                {joke || "Click 'Generate Joke' to see a dad joke."}
                             </Typography>
-                        </Fade>
-                    </Box>
-                    
-                    <Fade in={!!joke} timeout={800}>
-                        <Box sx={{ 
-                            display: 'flex', 
-                            justifyContent: 'center',
-                            gap: 2
-                        }}>
-                            <IconButton 
-                                onClick={copyToClipboard}
-                                sx={{ color: '#FF6B6B' }}
-                            >
-                                <ContentCopy />
-                            </IconButton>
-                            {canShare && (
-                                <IconButton 
-                                    onClick={shareJoke}
-                                    sx={{ color: '#4ECDC4' }}
-                                >
-                                    <Share />
-                                </IconButton>
-                            )}
                         </Box>
-                    </Fade>
-                </Box>
-            </Card>
-            
-            <Box sx={{ 
-                mt: { xs: 4, md: 4 },
-                position: { xs: 'relative', md: 'static' }
-            }}>
+                        
+                        {/* Action Buttons */}
+                        {joke && (
+                            <>
+                                <Divider sx={{ mb: 3 }} />
+                                <Box sx={{ 
+                                    display: 'flex', 
+                                    gap: 1
+                                }}>
+                                    <IconButton 
+                                        onClick={copyToClipboard}
+                                        size="small"
+                                        sx={{ 
+                                            border: '1px solid',
+                                            borderColor: 'divider',
+                                            color: copied ? 'text.primary' : 'text.secondary',
+                                            borderRadius: '6px'
+                                        }}
+                                    >
+                                        <ContentCopy fontSize="small" />
+                                    </IconButton>
+                                    {copied && (
+                                        <Typography 
+                                            variant="caption" 
+                                            sx={{ 
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                color: 'text.secondary',
+                                                fontSize: '0.8125rem'
+                                            }}
+                                        >
+                                            Copied to clipboard
+                                        </Typography>
+                                    )}
+                                    {canShare && (
+                                        <IconButton 
+                                            onClick={shareJoke}
+                                            size="small"
+                                            sx={{ 
+                                                border: '1px solid',
+                                                borderColor: 'divider',
+                                                color: 'text.secondary',
+                                                borderRadius: '6px',
+                                                ml: 'auto'
+                                            }}
+                                        >
+                                            <Share fontSize="small" />
+                                        </IconButton>
+                                    )}
+                                </Box>
+                            </>
+                        )}
+                    </Box>
+                </Card>
+                
+                {/* Footer */}
                 <Footer />
             </Box>
         </Box>

@@ -1,5 +1,4 @@
 import { Box, Typography, Link } from '@mui/material';
-import { GitHub, LinkedIn } from '@mui/icons-material';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -9,58 +8,62 @@ function Footer() {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
-                gap: 1.5,
-                color: 'text.primary'
+                gap: 0.5,
+                py: 2
             }}
         >
-            <Box sx={{ display: 'flex', gap: 3 }}>
-                <Link 
-                    href="https://github.com/RaHasib" 
-                    target="_blank" 
-                    color="inherit"
-                    sx={{ 
-                        opacity: 0.9,
-                        '&:hover': { 
-                            opacity: 1,
-                            transform: 'scale(1.1)',
-                            transition: 'all 0.2s ease-in-out'
-                        }
-                    }}
-                >
-                    <GitHub sx={{ fontSize: 28 }} />
-                </Link>
-                <Link 
-                    href="https://www.linkedin.com/in/raisul-amin-hasib/" 
-                    target="_blank" 
-                    color="inherit"
-                    sx={{ 
-                        opacity: 0.9,
-                        '&:hover': { 
-                            opacity: 1,
-                            transform: 'scale(1.1)',
-                            transition: 'all 0.2s ease-in-out'
-                        }
-                    }}
-                >
-                    <LinkedIn sx={{ fontSize: 28 }} />
-                </Link>
-            </Box>
             <Typography 
                 variant="body2" 
                 sx={{ 
-                    opacity: 0.9,
-                    fontWeight: 500,
-                    fontSize: '0.95rem'
+                    color: 'text.secondary',
+                    fontSize: '0.8125rem',
+                    fontWeight: 400
                 }}
             >
-                Made with ❤️ by Raisul Amin Hasib
+                Jokes provided by{' '}
+                <Link 
+                    href="https://icanhazdadjoke.com" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    underline="always"
+                    sx={{ 
+                        color: 'text.primary',
+                        fontWeight: 500
+                    }}
+                >
+                    icanhazdadjoke
+                </Link>
             </Typography>
+            
+            <Typography 
+                variant="body2" 
+                sx={{ 
+                    color: 'text.secondary',
+                    fontSize: '0.8125rem',
+                    fontWeight: 400
+                }}
+            >
+                Built by{' '}
+                <Link 
+                    href="https://www.raisulhasib.dev" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    underline="always"
+                    sx={{ 
+                        color: 'text.primary',
+                        fontWeight: 500
+                    }}
+                >
+                    Raisul Hasib
+                </Link>
+            </Typography>
+            
             <Typography 
                 variant="caption" 
                 sx={{ 
-                    opacity: 0.8,
-                    fontSize: '0.85rem'
+                    color: 'text.secondary',
+                    fontSize: '0.75rem',
+                    fontWeight: 400
                 }}
             >
                 © {currentYear}

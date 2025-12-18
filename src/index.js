@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider, CssBaseline, Box, Container } from "@mui/material";
 import './index.css';
 import DadJokes from './Components/DadJokes/DadJokes';
-import RandomEmoji from "./Components/RandomEmoji/RandomEmoji";
+
 import { theme } from './theme';
 import '@fontsource/poppins/300.css';
 import '@fontsource/poppins/400.css';
@@ -32,7 +32,6 @@ root.render(
                             gap: 4
                         }}
                     >
-                        <RandomEmoji />
                         <DadJokes />
                     </Box>
                 </Container>
